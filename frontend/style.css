@@ -1,0 +1,397 @@
+:root {
+  --bg-color: #f6f1ea;
+  --card-bg: #ffffff;
+  --accent-color: #d97663;
+  --text-color: #333333;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --color1: #f5e6e0;
+  --color2: #e8f0fe;
+  --color3: #f0f5e9;
+  --color4: #f9efe5;
+}
+
+body {
+  background-color: var(--bg-color);
+  font-family: "Open Sans", sans-serif;
+  color: var(--text-color);
+  padding: 2rem;
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0;
+  animation: fadeUp 0.5s ease-out forwards;
+  animation-delay: 0.1s;
+}
+
+p {
+  font-family: "Poiret One", cursive;
+  font-size: 1.3rem;
+  line-height: 1;
+}
+
+#matrixCanvas {
+  min-height: 100vh;
+}
+
+#header {
+  text-align: center;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+#title {
+  font-family: "Lovers Quarrel", cursive;
+  font-size: 6rem;
+  line-height: 0.3;
+  font-weight: 100;
+  text-align: center;
+  color: var(--accent-color);
+}
+
+@keyframes slideUpOut {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-180%);
+  }
+}
+
+.slide-out-top {
+  animation: slideUpOut 1s ease-out forwards;
+}
+
+#logo {
+  width: 200px;
+  transition: all 0.5s ease;
+}
+
+@keyframes moveUp {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-60%);
+  }
+}
+
+.logo-move-up {
+  animation: moveUp 1s ease-out forwards;
+}
+
+@keyframes fadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+#initialPromptSection {
+  display: flex;
+  flex-direction: column;
+  max-width: 600px;
+  width: 100%;
+}
+
+.textField {
+  min-height: 150px;
+  max-width: 600px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  border-color: var(--accent-color);
+  border-radius: 0.5rem;
+  font-family: "Open Sans", sans-serif;
+  font-size: 1.3rem;
+  font-weight: 500;
+  resize: none;
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
+  background: rgba(255, 255, 255, 0.9);
+  font-family: "Poiret One", cursive;
+}
+.textField:hover {
+  box-shadow: 0 0 30px rgba(255, 215, 0, 0.4);
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.textField:focus {
+  outline: none;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+  border-color: #ffd700;
+}
+
+button {
+  background: linear-gradient(135deg, #d97663 0%, #bf6545 100%);
+  color: white;
+  padding: 0.8rem 2rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1.3rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  font-family: "Poiret One", cursive;
+  display: block;
+  margin-left: auto; /* pushes it to the right */
+  margin-right: 0;
+}
+
+button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 15px rgba(217, 118, 99, 0.4);
+}
+
+button::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent 20%,
+    rgba(255, 215, 0, 0.2) 50%,
+    transparent 80%
+  );
+  animation: shine 2s infinite;
+}
+
+@keyframes shine {
+  0% {
+    transform: translateX(-100%) rotate(45deg);
+  }
+  100% {
+    transform: translateX(100%) rotate(45deg);
+  }
+}
+
+
+
+#storyContainer {
+  max-width: 800px;
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+  transform: translateY(-140px);
+}
+
+#narrativeContainer {
+  max-width: 800px;
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+  font-family: "Lovers Quarrel", cursive;
+  color: #6d6158;
+  font-size: 2.5rem;
+  line-height: 1.1;
+  margin-bottom: 2rem;
+}
+
+#choicesContainer {
+  margin-top: 2rem;
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.choice-card {
+  background: var(--card-bg);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px var(--shadow-color);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  animation: fadeUp 0.4s ease-out forwards;
+  animation-delay: var(--delay, 0s);
+  margin-bottom: 12px;
+  text-align: left;
+}
+
+.choice-card:nth-child(even) {
+  text-align: right;
+}
+
+.choice-card::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle at center,
+    rgba(139, 94, 60, 0.1),
+    transparent 70%
+  );
+  transform: rotate(25deg);
+  transition: opacity 0.3s ease;
+}
+
+.choice-card:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 8px 20px var(--shadow-color);
+}
+
+.choice-card:hover::before {
+  opacity: 0.2;
+}
+
+.choice-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+    circle at var(--mouse-x) var(--mouse-y),
+    rgba(255, 255, 255, 0.4) 0%,
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+.choice-card:hover::after {
+  opacity: 0.6;
+}
+
+.choice-card:focus {
+  outline: none;
+}
+
+.choice-text {
+  position: relative;
+  font-family: "Poiret One", sans-serif;
+  font-size: 1.5rem;
+  line-height: 1.1;
+  color: var(--text-color);
+  transition: color 0.3s ease;
+}
+
+.choice-card:hover .choice-text {
+  color: var(--accent-color);
+}
+
+
+.typing-cursor {
+  display: inline-block;
+  margin-left: 2px;
+  animation: blink 0.7s infinite step-start;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+#matrixCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  display: block;
+  opacity: 0;
+  animation: fadeIn 1s ease-out forwards;
+  animation-delay: 0.3s;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.fade-only-out {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+
+.fade-out {
+  opacity: 0 !important;
+  transform: translateY(20px) !important;
+}
+
+body > *:not(#matrixCanvas) {
+  position: relative;
+  z-index: 1;
+}
+
+#logo {
+  z-index: 2;
+}
+
+.choice-card.fade-out {
+  animation: fadeOutShrink 0.5s ease-out forwards;
+}
+
+@keyframes fadeOutShrink {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+}
+
+@keyframes chosenExit {
+  0% {
+    transform: scale(1);
+    filter: blur(0);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(5);
+    filter: blur(2px);
+    opacity: 0.8;
+    z-index: 10;
+  }
+  100% {
+    transform: scale(10) translateY(-100vh);
+    filter: blur(80px);
+    opacity: 0;
+  }
+}
+
+@keyframes slideOutLeft {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+}
+
+.chosen-exit {
+  animation: chosenExit 2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.fade-out-others {
+  animation: fadeOutOthers 0.6s ease-out forwards;
+}

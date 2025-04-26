@@ -1,0 +1,5 @@
+google-generativeai
+openai
+Flask
+Flask-Cors
+requests
