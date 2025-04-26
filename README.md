@@ -12,6 +12,10 @@ An interactive storytelling application powered by Large Language Models (LLMs).
 - Two interaction modes: multiple choice and free text input
 - Typewriter effect for immersive story display
 
+## Demo
+
+[![Chapitre.ia Demo](https://img.youtube.com/vi/VgjE2Dj4MnA/0.jpg)](https://youtu.be/VgjE2Dj4MnA)
+
 ## Installation
 
 1. Clone this repository
